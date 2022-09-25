@@ -28,43 +28,43 @@ const provider = new OAuthProvider('microsoft.com');
 
 const auth = getAuth();
 console.log(auth);
-// function signUP() {
-//   signInWithPopup(auth, provider)
-//     .then((result) => {
-//       // User is signed in.
-//       // IdP data available in result.additionalUserInfo.profile.
-//       console.log(result.additionalUserInfo.profile);
-//       // Get the OAuth access token and ID Token
-//       const credential = OAuthProvider.credentialFromResult(result);
-//       const accessToken = credential.accessToken;
-//       const idToken = credential.idToken;
-//       console.log(credential);
-//       console.log(accessToken);
-//       console.log(idToken);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       // Handle error.
-//     });
-// }
-
 function signUP() {
-  signInWithRedirect(auth, provider);
-  getRedirectResult(auth)
+  signInWithPopup(auth, provider)
     .then((result) => {
       // User is signed in.
       // IdP data available in result.additionalUserInfo.profile.
-
+      console.log(result.additionalUserInfo.profile);
       // Get the OAuth access token and ID Token
       const credential = OAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
       const idToken = credential.idToken;
+      console.log(credential);
+      console.log(accessToken);
+      console.log(idToken);
     })
     .catch((error) => {
-      // Handle error.
       console.log(error);
+      // Handle error.
     });
 }
+
+// function signUP() {
+//   signInWithRedirect(auth, provider);
+//   getRedirectResult(auth)
+//     .then((result) => {
+//       // User is signed in.
+//       // IdP data available in result.additionalUserInfo.profile.
+
+//       // Get the OAuth access token and ID Token
+//       const credential = OAuthProvider.credentialFromResult(result);
+//       const accessToken = credential.accessToken;
+//       const idToken = credential.idToken;
+//     })
+//     .catch((error) => {
+//       // Handle error.
+//       console.log(error);
+//     });
+// }
 
 function signOUT() {
   signOut(auth)
