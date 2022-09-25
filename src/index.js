@@ -29,22 +29,30 @@ console.log(auth);
 
 // const provider = new firebase.auth.OAuthProvider(‘microsoft.com’);
 
-const handleMicrosoftLogin = () => {
-  // setLoader((prevState) => ({ ...prevState, microsoftLoading: true }));
-  // const provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
-  const provider = new firebase.auth.OAuthProvider('microsoft.com');
-  // provider.setCustomParameters({
-  //   prompt: 'consent',
-  //   tenant: '6d28e4fb-9074-4a0b-a5b8-9a89f632cc60',
-  // });
-  firebaseConfig
-    .auth()
-    .signInWithPopup(provider)
-    .then((data) => {
-      console.log(data);
-      // setLoader((prevState) => ({ ...prevState, microsoftLoading: false }));
-    });
-};
+// const handleMicrosoftLogin = () => {
+//   // setLoader((prevState) => ({ ...prevState, microsoftLoading: true }));
+//   // const provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
+//   const provider = new firebase.auth.OAuthProvider('microsoft.com');
+//   // provider.setCustomParameters({
+//   //   prompt: 'consent',
+//   //   tenant: '6d28e4fb-9074-4a0b-a5b8-9a89f632cc60',
+//   // });
+//   firebaseConfig
+//     .auth()
+//     .signInWithPopup(provider)
+//     .then((data) => {
+//       console.log(data);
+//       // setLoader((prevState) => ({ ...prevState, microsoftLoading: false }));
+//     });
+// };
+
+function signUP() {
+  const provider = new OAuthProvider('microsoft.com');
+  signInWithPopup(provider).then((data) => {
+    console.log(data);
+    // setLoader((prevState) => ({ ...prevState, microsoftLoading: false }));
+  });
+}
 
 // function signUP() {
 //   signInWithPopup(auth, provider)
@@ -95,5 +103,5 @@ function signOUT() {
     });
 }
 
-document.querySelector('.test').addEventListener('click', handleMicrosoftLogin);
+document.querySelector('.test').addEventListener('click', signUP);
 document.querySelector('.logOut').addEventListener('click', signOUT);
