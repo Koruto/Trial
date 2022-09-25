@@ -40,6 +40,7 @@ function signUP() {
       console.log(idToken);
     })
     .catch((error) => {
+      console.log('Error');
       // Handle error.
     });
 }
