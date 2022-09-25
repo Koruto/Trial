@@ -31,7 +31,12 @@ console.log(auth);
 
 const handleMicrosoftLogin = () => {
   // setLoader((prevState) => ({ ...prevState, microsoftLoading: true }));
-  const provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
+  // const provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
+  let provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
+  provider.setCustomParameters({
+    prompt: 'consent',
+    tenant: 'the tenant id provided by outlook',
+  });
   firebaseConfig
     .auth()
     .signInWithPopup(provider)
