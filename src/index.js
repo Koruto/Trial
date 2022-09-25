@@ -31,7 +31,7 @@ function signUP() {
     .then((result) => {
       // User is signed in.
       // IdP data available in result.additionalUserInfo.profile.
-      console.log('Logged In');
+      console.log(result.additionalUserInfo.profile);
       // Get the OAuth access token and ID Token
       const credential = OAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
