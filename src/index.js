@@ -30,7 +30,7 @@ function signUP() {
     .then((result) => {
       // User is signed in.
       // IdP data available in result.additionalUserInfo.profile.
-
+      console.log('Logged In');
       // Get the OAuth access token and ID Token
       const credential = OAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
@@ -47,6 +47,7 @@ function signUP() {
 function signOUT() {
   signOut(auth)
     .then(() => {
+      console.log('Logged Out');
       // Sign-out successful.
     })
     .catch((error) => {
