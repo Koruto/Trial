@@ -5,6 +5,8 @@ import {
   getAuth,
   signInWithPopup,
   signOut,
+  signInWithRedirect,
+  getRedirectResult,
 } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,23 +28,41 @@ const provider = new OAuthProvider('microsoft.com');
 
 const auth = getAuth();
 console.log(auth);
+// function signUP() {
+//   signInWithPopup(auth, provider)
+//     .then((result) => {
+//       // User is signed in.
+//       // IdP data available in result.additionalUserInfo.profile.
+//       console.log(result.additionalUserInfo.profile);
+//       // Get the OAuth access token and ID Token
+//       const credential = OAuthProvider.credentialFromResult(result);
+//       const accessToken = credential.accessToken;
+//       const idToken = credential.idToken;
+//       console.log(credential);
+//       console.log(accessToken);
+//       console.log(idToken);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       // Handle error.
+//     });
+// }
+
 function signUP() {
-  signInWithPopup(auth, provider)
+  signInWithRedirect(auth, provider);
+  getRedirectResult(auth)
     .then((result) => {
       // User is signed in.
       // IdP data available in result.additionalUserInfo.profile.
-      console.log(result.additionalUserInfo.profile);
+
       // Get the OAuth access token and ID Token
       const credential = OAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
       const idToken = credential.idToken;
-      console.log(credential);
-      console.log(accessToken);
-      console.log(idToken);
     })
     .catch((error) => {
-      console.log(error);
       // Handle error.
+      console.log(error);
     });
 }
 
