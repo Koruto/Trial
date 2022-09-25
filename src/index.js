@@ -24,29 +24,42 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const provider = new OAuthProvider('microsoft.com');
-
 const auth = getAuth();
 console.log(auth);
-function signUP() {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // User is signed in.
-      // IdP data available in result.additionalUserInfo.profile.
-      console.log(result.additionalUserInfo.profile);
-      // Get the OAuth access token and ID Token
-      const credential = OAuthProvider.credentialFromResult(result);
-      const accessToken = credential.accessToken;
-      const idToken = credential.idToken;
-      console.log(credential);
-      console.log(accessToken);
-      console.log(idToken);
-    })
-    .catch((error) => {
-      console.log(error);
-      // Handle error.
+
+// const provider = new firebase.auth.OAuthProvider(‘microsoft.com’);
+
+const handleMicrosoftLogin = () => {
+  // setLoader((prevState) => ({ ...prevState, microsoftLoading: true }));
+  const provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
+  firebaseConfig
+    .auth()
+    .signInWithPopup(provider)
+    .then((data) => {
+      console.log(data);
+      // setLoader((prevState) => ({ ...prevState, microsoftLoading: false }));
     });
-}
+};
+
+// function signUP() {
+//   signInWithPopup(auth, provider)
+//     .then((result) => {
+//       // User is signed in.
+//       // IdP data available in result.additionalUserInfo.profile.
+//       console.log(result.additionalUserInfo.profile);
+//       // Get the OAuth access token and ID Token
+//       const credential = OAuthProvider.credentialFromResult(result);
+//       const accessToken = credential.accessToken;
+//       const idToken = credential.idToken;
+//       console.log(credential);
+//       console.log(accessToken);
+//       console.log(idToken);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       // Handle error.
+//     });
+// }
 
 // function signUP() {
 //   signInWithRedirect(auth, provider);
@@ -77,5 +90,5 @@ function signOUT() {
     });
 }
 
-document.querySelector('.test').addEventListener('click', signUP);
+document.querySelector('.test').addEventListener('click', handleMicrosoftLogin);
 document.querySelector('.logOut').addEventListener('click', signOUT);
