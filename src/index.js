@@ -35,7 +35,7 @@ const handleMicrosoftLogin = () => {
   let provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
   provider.setCustomParameters({
     prompt: 'consent',
-    tenant: 'the tenant id provided by outlook',
+    tenant: '6d28e4fb-9074-4a0b-a5b8-9a89f632cc60',
   });
   firebaseConfig
     .auth()
