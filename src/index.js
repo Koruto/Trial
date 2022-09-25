@@ -5,8 +5,6 @@ import {
   getAuth,
   signInWithPopup,
   signOut,
-  signInWithRedirect,
-  getRedirectResult,
 } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,70 +25,26 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 console.log(auth);
 
-// const provider = new firebase.auth.OAuthProvider(‘microsoft.com’);
-
-// const handleMicrosoftLogin = () => {
-//   // setLoader((prevState) => ({ ...prevState, microsoftLoading: true }));
-//   // const provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
-//   const provider = new firebase.auth.OAuthProvider('microsoft.com');
-//   // provider.setCustomParameters({
-//   //   prompt: 'consent',
-//   //   tenant: '6d28e4fb-9074-4a0b-a5b8-9a89f632cc60',
-//   // });
-//   firebaseConfig
-//     .auth()
-//     .signInWithPopup(provider)
-//     .then((data) => {
-//       console.log(data);
-//       // setLoader((prevState) => ({ ...prevState, microsoftLoading: false }));
-//     });
-// };
-
+const provider = new OAuthProvider('microsoft.com');
 function signUP() {
-  const provider = new OAuthProvider('microsoft.com');
-  signInWithPopup(provider).then((data) => {
-    console.log(data);
-    // setLoader((prevState) => ({ ...prevState, microsoftLoading: false }));
-  });
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // User is signed in.
+      // IdP data available in result.additionalUserInfo.profile.
+      console.log(result.additionalUserInfo.profile);
+      // Get the OAuth access token and ID Token
+      const credential = OAuthProvider.credentialFromResult(result);
+      const accessToken = credential.accessToken;
+      const idToken = credential.idToken;
+      console.log(credential);
+      console.log(accessToken);
+      console.log(idToken);
+    })
+    .catch((error) => {
+      console.log(error);
+      // Handle error.
+    });
 }
-
-// function signUP() {
-//   signInWithPopup(auth, provider)
-//     .then((result) => {
-//       // User is signed in.
-//       // IdP data available in result.additionalUserInfo.profile.
-//       console.log(result.additionalUserInfo.profile);
-//       // Get the OAuth access token and ID Token
-//       const credential = OAuthProvider.credentialFromResult(result);
-//       const accessToken = credential.accessToken;
-//       const idToken = credential.idToken;
-//       console.log(credential);
-//       console.log(accessToken);
-//       console.log(idToken);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       // Handle error.
-//     });
-// }
-
-// function signUP() {
-//   signInWithRedirect(auth, provider);
-//   getRedirectResult(auth)
-//     .then((result) => {
-//       // User is signed in.
-//       // IdP data available in result.additionalUserInfo.profile.
-
-//       // Get the OAuth access token and ID Token
-//       const credential = OAuthProvider.credentialFromResult(result);
-//       const accessToken = credential.accessToken;
-//       const idToken = credential.idToken;
-//     })
-//     .catch((error) => {
-//       // Handle error.
-//       console.log(error);
-//     });
-// }
 
 function signOUT() {
   signOut(auth)
@@ -100,6 +54,7 @@ function signOUT() {
     })
     .catch((error) => {
       // An error happened.
+      console.log(error);
     });
 }
 
