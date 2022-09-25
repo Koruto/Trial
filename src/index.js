@@ -25,6 +25,7 @@ const app = initializeApp(firebaseConfig);
 const provider = new OAuthProvider('microsoft.com');
 
 const auth = getAuth();
+console.log(auth);
 function signUP() {
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -40,7 +41,7 @@ function signUP() {
       console.log(idToken);
     })
     .catch((error) => {
-      console.log('Error');
+      console.log(error);
       // Handle error.
     });
 }
