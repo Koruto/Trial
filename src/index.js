@@ -32,7 +32,7 @@ console.log(auth);
 const handleMicrosoftLogin = () => {
   // setLoader((prevState) => ({ ...prevState, microsoftLoading: true }));
   // const provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
-  const provider = new firebaseConfig.auth.OAuthProvider('microsoft.com');
+  const provider = new firebase.auth.OAuthProvider('microsoft.com');
   // provider.setCustomParameters({
   //   prompt: 'consent',
   //   tenant: '6d28e4fb-9074-4a0b-a5b8-9a89f632cc60',
