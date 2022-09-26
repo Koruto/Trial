@@ -33,7 +33,7 @@ connectFunctionsEmulator(functions, 'localhost', 5500);
 
 const auth = getAuth();
 console.log(auth);
-connectAuthEmulator(auth, 'http://localhost:9099');
+// connectAuthEmulator(auth, 'http://localhost:9099');
 
 let provider = new OAuthProvider('microsoft.com');
 provider.setCustomParameters({
