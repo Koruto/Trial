@@ -1,13 +1,19 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js';
+import {
+  initializeApp,
+  getApp,
+} from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js';
 import {
   OAuthProvider,
   getAuth,
   signInWithPopup,
   signOut,
+  connectAuthEmulator,
 } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {
+  getFunctions,
+  connectFunctionsEmulator,
+} from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-functions.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -22,13 +28,18 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+const functions = getFunctions(getApp());
+connectFunctionsEmulator(functions, 'localhost', 5500);
+
 const auth = getAuth();
 console.log(auth);
+connectAuthEmulator(auth, 'http://localhost:9099');
 
 const provider = new OAuthProvider('microsoft.com');
 function signUP() {
   signInWithPopup(auth, provider)
     .then((result) => {
+      console.log(result);
       // User is signed in.
       // IdP data available in result.additionalUserInfo.profile.
       console.log(result.additionalUserInfo.profile);
