@@ -35,7 +35,11 @@ const auth = getAuth();
 console.log(auth);
 connectAuthEmulator(auth, 'http://localhost:9099');
 
-const provider = new OAuthProvider('microsoft.com');
+let provider = new OAuthProvider('microsoft.com');
+provider.setCustomParameters({
+  prompt: 'consent',
+  tenant: '6d28e4fb-9074-4a0b-a5b8-9a89f632cc60',
+});
 function signUP() {
   signInWithPopup(auth, provider)
     .then((result) => {
